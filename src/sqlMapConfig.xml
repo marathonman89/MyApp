@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+                                       
+<!DOCTYPE sqlMapConfig
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+                             
+<sqlMapConfig>                  
+  <transactionManager type="JDBC" > 
+  <dataSource type="SIMPLE"> 
+      <property name="JDBC.Driver"
+                value="org.sqlite.JDBC"/>
+      <property name="JDBC.ConnectionURL"
+                value="jdbc:sqlite:D:/Documents/SMS.db3"/>
+      <property name="JDBC.Username"
+                value=""/>
+      <property name="JDBC.Password"
+                value=""/>
+    </dataSource>
+  </transactionManager>
+  <!--<sqlMap resource="queries.xml" />
+  <sqlMap resource="queries2.xml" />-->
+  <sqlMap resource="smsSelectQueries.xml" />
+  <sqlMap resource="smsInsertQueries.xml" />
+  <sqlMap resource="smsUpdateQueries.xml" />
+  <sqlMap resource="smsDeleteQueries.xml" />
+</sqlMapConfig>

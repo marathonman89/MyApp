@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<insert id="adviseStudent" parameterClass="sms.student.Student">
+    	INSERT 
+    		INTO ADVISING(STUDENT_ID, PROGRAM_CODE, YEAR_LEVEL, SCHOOL_YEAR, SEMESTER, SECTION)
+		VALUES 
+			(#student_id#, #program_code#, #year_level#, #school_year#, #semester#, #section#)
+   </insert>
+   <insert id="controlSubject" parameterClass="sms.student.Student">
+   		INSERT 
+   			INTO REGISTRATION_RECORD(STUDENT_ID, OFFERED_ID)
+   		VALUES
+   			(#student_id#,#offered_id#)
+   </insert>
+   <insert id="allowPrivilege" parameterClass="sms.user.Employee">
+   		INSERT
+   			INTO USER_ROLE(EMPLOYEE_ID, ROLE_ID)
+   		VALUES
+   			(#employee_id#, #role_id#)
+   </insert>
+   <insert id="insertEmployee" parameterClass="sms.user.Employee">
+   		INSERT 
+   			INTO EMPLOYEE (EMPLOYEE_ID,FNAME,LNAME,MNAME,BDATE,ADDRESS,
+   						   GENDER,RANK,COST_CENTER,EMAIL_ADDRESS, WORK_TYPE)
+   			VALUES (#employee_id#,#fname#,#lname#,#mname#,#bdate#,#address#,
+   				    #gender#,#rank#,#cost_center#,#email_address#, #work_type#)
+   </insert>
+   <insert id="insertUser" parameterClass="sms.user.Employee">
+   		INSERT
+   			INTO SYSTEM_USER (EMPLOYEE_ID, PASSWORD, ACCT_STATUS)
+   			VALUES (#employee_id#, #password#, #acct_status#)
+   </insert>
+   <insert id="insertStudent" parameterClass="sms.student.Student">
+   		INSERT 
+   			INTO STUDENT (STUDENT_ID,FNAME,LNAME,MNAME,BDATE,BARANGAY,
+   						   MUNICIPALITY, PROVINCE,GENDER,EDUC_LEVEL)
+   			VALUES (#student_id#,#fname#,#lname#,#mname#,#bdate#,#barangay#,
+   				    #municipality#,#province#,#gender#,#educ_level#)
+   </insert>
+   <insert id="insertScholarship" parameterClass="sms.scholarship.Scholarship">
+   		INSERT
+   			INTO STUD_SCHOLARSHIP (STUD_SCHOLARSHIP_ID, STUDENT_ID,SCHOLARSHIP_CODE,SCHOLARSHIP_STATUS)
+   			VALUES (#stud_scholarship_id#,#student_id#,#scholarship_code#,#status#)
+   </insert>
+</sqlMap>

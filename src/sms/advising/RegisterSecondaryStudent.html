@@ -1,0 +1,65 @@
+<wicket:extend>
+<div id="controlform" align=center>
+<div align=right>
+	<form wicket:id="form">
+		<input wicket:id="done" class="button" type="submit" value="DONE"/>
+	</form>
+</div>
+<h2>Registration</h2>
+<p>SY: <span wicket:id="sy"></span><br/>
+Semester: <span wicket:id="sem"></span><br/></p>
+
+<table id="infoTable">
+	<tr>
+		<th colspan=2 align=center id="tableh"><span>Student Information</span></th>
+	</tr>
+	<tr>
+		<th align=left>Student ID</th>
+		<td><span wicket:id="student_id"></span></td>
+	</tr>
+	<tr>
+		<th align=left>First Name</th>
+		<td><span wicket:id="fname"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Middle Name</th>
+		<td><span wicket:id="mname"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Last Name</th>
+		<td><span wicket:id="lname"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Program Taken</th>
+		<td><span wicket:id="program"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Year</th>
+		<td><span wicket:id="year"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Section</th>
+		<td><span wicket:id="section"></span></td>
+	</tr>
+</table>
+<br/><br/><br/>
+<table id="subjectTable">
+	<tr class="tableHeader">
+		<td colspan=7 align=center>Enrolled Subjects</td>
+	</tr>
+	<tr>
+		<th>Subject</th>
+		<th>Time</th>
+		<th>Day</th>
+		<th>Room</th>
+	</tr>
+	<tr wicket:id="record">
+		<td wicket:id="subject_name"></td>
+		<td wicket:id="time"></td>
+		<td wicket:id="day"></td>
+		<td wicket:id="room"></td>
+	</tr>
+</table>
+
+</div>
+</wicket:extend>

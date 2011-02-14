@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<update id="decSlot" parameterClass="sms.student.Student">
+	UPDATE SUBJECT_OFFERED
+	SET SLOT=(SELECT SLOT-1 FROM SUBJECT_OFFERED WHERE OFFERED_ID=#offered_id#)
+	WHERE OFFERED_ID=#offered_id#
+	</update>
+	
+	<update id="incSlot" parameterClass="sms.student.Student">
+	UPDATE SUBJECT_OFFERED
+	SET SLOT=(SELECT SLOT+1 FROM SUBJECT_OFFERED WHERE OFFERED_ID=#offered_id#)
+	WHERE OFFERED_ID=#offered_id#
+	</update>
+	
+	<update id="updateGrade" parameterClass="sms.student.Student">
+	UPDATE REGISTRATION_RECORD
+	SET RATING=#rating#
+	WHERE STUDENT_ID=#student_id# AND
+	RECORD_ID=#record_id#
+	</update>
+	
+	<update id="lockGradingSheet" parameterClass="sms.subject.Subject">
+	UPDATE SUBJECT_OFFERED
+	SET GRADING_SHEET_LOCK=1
+	WHERE OFFERED_ID=#offered_id#
+	</update>
+	
+	<update id="unlockGradingSheet" parameterClass="sms.subject.Subject">
+	UPDATE SUBJECT_OFFERED
+	SET GRADING_SHEET_LOCK=0
+	WHERE OFFERED_ID=#offered_id#
+	</update>
+	
+	<update id="logFileToBeUsed" parameterClass="sms.lookup.Lookup">
+	UPDATE LOOKUP
+	SET LOG_FILE_USED=#log_file_used#
+	</update>
+	
+	<update id="updateAllLookupStatus" parameterClass="sms.lookup.Lookup">
+	UPDATE LOOKUP
+	SET ENR_ON = #enr_on#,
+	YEAR_STARTED = #year_started#,
+	SEM_STARTED = #sem_started#,
+	LOG_ENABLED = #log_enabled#
+	</update>
+	
+	<update id="updateAccountStatus" parameterClass="sms.user.Employee">
+	UPDATE SYSTEM_USER
+	SET ACCT_STATUS = #acct_status#
+	WHERE EMPLOYEE_ID = #employee_id#
+	</update>
+	<update id="updateScholarship" parameterClass="sms.scholarship.Scholarship">
+	UPDATE STUD_SCHOLARSHIP
+	SET SCHOLARSHIP_CODE = #scholarship_code#,
+	SCHOLARSHIP_STATUS = #scholarship_status#
+	WHERE STUDENT_ID =#student_id#
+	</update>
+</sqlMap>

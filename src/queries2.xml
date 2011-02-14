@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<select id="isRegistered" parameterClass="myapp.student.Student" resultClass="Integer">
+	SELECT COUNT(*) FROM REGISTRATION_RECORD WHERE student_id = #student_id#
+	</select>
+	<select id="getControllableSubjects" parameterClass="myapp.student.Student" resultClass="myapp.subject.Subject">
+	SELECT C.OFFERED_ID  as OFFERED_ID
+	FROM 
+		ADVISING as A, 
+		CURRICULUM as B,
+		SUBJECT_OFFERED as C
+	WHERE
+		A.PROGRAM_CODE = B.PROGRAM_CODE AND
+		A.YEAR_LEVEL = B.YEAR_LEVEL     AND
+		A.SCHOOL_YEAR = C.SCHOOL_YEAR   AND
+		A.SEMESTER = C.SEMESTER         AND
+		A.SECTION = C.SUBJECT_SECTION   AND
+		B.SUBJECT_CODE = C.SUBJECT_CODE AND
+		A.PROGRAM_CODE = #program_code# AND
+		A.SCHOOL_YEAR = #school_year#   AND
+		A.SEMESTER = #semester#			AND
+		A.YEAR_LEVEL = #year_level#
+	</select>
+	
+	<select id="getSecondaryStudentRecord" resultClass="myapp.subject.Subject" parameterClass="myapp.student.Student">
+	SELECT 
+		REGISTRATION_RECORD.RECORD_ID, SUBJECT_NAME, 
+		SUBJECT_OFFERED.OFFERED_ID, SUBJECT_SECTION, TIME, DAY, ROOM
+	FROM 
+		REGISTRATION_RECORD, SUBJECT_OFFERED, SUBJECT
+	WHERE
+		REGISTRATION_RECORD.STUDENT_ID=#student_id# AND
+		REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID AND
+		SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE AND
+		SUBJECT_OFFERED.SCHOOL_YEAR=#school_year# AND
+		SUBJECT_OFFERED.SEMESTER=#semester#
+	</select>
+	
+	<select id="getWorktypeAndCostCenter" resultClass="myapp.user.Employee" parameterClass="myapp.user.Employee">
+	SELECT 
+		WORK_TYPE, 
+		COST_CENTER
+	FROM 
+		EMPLOYEE
+	WHERE 
+		EMPLOYEE_ID = #employee_id#
+	</select>
+	
+	<select id="getStudentDeptCode" resultClass="Integer" parameterClass="myapp.student.Student">
+	SELECT 
+		B.DEPT_CODE AS DEPT_CODE
+	FROM 
+		ADVISING AS A, 
+		PROGRAM AS B
+	WHERE
+		A.STUDENT_ID=#student_id# AND
+		A.PROGRAM_CODE=B.PROGRAM_CODE
+	</select>
+</sqlMap>

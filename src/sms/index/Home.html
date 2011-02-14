@@ -1,0 +1,29 @@
+<wicket:extend>
+<div id="rolenav" align=right>
+	<form wicket:id="jumpTo">
+		<table>
+		<tr>
+			<td>Jump to:</td>
+			<td><select wicket:id="choices"></select></td>
+		</tr>
+		</table>
+	</form>
+</div>
+
+<div id="links">
+	<ul>
+		<!--
+		<wicket:link>
+		<li><a href="Home.html">Home</a></li>
+		<li><a href="Account.html">Account Settings</a></li>
+		</wicket:link> -->
+		<li><a wicket:id="home">Home</a></li> |
+		<li><a wicket:id="account">Account Settings</a></li> |
+		<li><a wicket:id="logout">Logout</a></li> 
+	</ul>
+</div>
+
+<wicket:child/>
+
+<div id="emptydiv"></div>
+</wicket:extend>

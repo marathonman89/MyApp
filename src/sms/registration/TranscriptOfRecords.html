@@ -1,0 +1,36 @@
+<wicket:extend>
+<h3>Transcript of Records</h3>
+	<hr/>
+	<div id="innercontent">
+		<div id="toptext">General</div>
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="Back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		</div>
+		<div wicket:id="error" class="error"></div>
+		<div align=center>
+		<form wicket:id="torsearchform" autocomplete=off>
+			<i>TOR Search:</i>
+			<input wicket:id="name" type="text" size="45" maxlength="30" />
+			<input wicket:id="searchbutton" class="button" type="submit" value="search"/>
+			<br/><span class="note">*To reset, leave the textfield empty then click search</span>
+		</form>
+		</div>
+		<br/><br/>
+		<table align=center cellspacing="0" id="dataTable" width="85%">
+			<tr>
+				<th colspan=3></th>
+			</tr>
+			<tr>
+    			<th wicket:id="orderByStudentId" style="width:25%;">STUDENT ID</th>
+    			<th wicket:id="orderByLname" style="width:60%;">NAME</th>
+    			<th style="width:10%;">ACTION</th>
+    		</tr>
+    		<tr wicket:id="records">
+    			<td wicket:id="student_id"></td>
+    			<td wicket:id="student_name"></td>
+    			<td wicket:id="action"></td>
+    		</tr>
+		</table>
+		
+	</div>
+</wicket:extend>

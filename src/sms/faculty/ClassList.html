@@ -1,0 +1,46 @@
+<wicket:extend>
+<h3>Class List</h3>
+	<hr/>
+	<div id="innercontent">
+		<div id="toptext">General</div>
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		</div>
+		<div wicket:id="error" class="error"></div>
+		<div align=center>
+		<form wicket:id="subjectSearchForm" autocomplete=off>
+			<i>Subject Search:</i>
+			<input wicket:id="searchedSubject" type="text" size="50" maxlength=100/>
+			<input wicket:id="searchButton" class="button" type="submit" value="search"/>
+			<br/><span class="note">*for specific results, follow this syntax: subject_code[space]subject_number (i.e. CSC 100)
+			<br/>To reset, leave the textfield empty then click search</span>
+		</form>
+		</div>
+
+		<br/><br/>
+		<table cellspacing="0" align=center id="dataTable" width="97%">
+		<tr>
+			<td colspan=6>
+				<i><span wicket:id="results"></span><br/></i>
+				<span wicket:id="navigator">[dataview navigator]</span>
+			</td>
+		</tr>
+    	<tr>
+	        <th>Course Number</th>
+	        <th>Course Description</th>
+	        <th>Section</th>
+	        <th>Time</th>
+	        <th>Day</th>
+	        <th>Action</th>
+    	</tr>
+    	<tr wicket:id="sorting">
+	        <td><span wicket:id="subject_code"></span> </td>
+	        <td><span wicket:id="subject_name"></span></td>
+	        <td><span wicket:id="subject_section"></span></td>
+	        <td><span wicket:id="time"></span></td>
+	        <td><span wicket:id="day"></span></td>
+	        <td><span wicket:id="action"></span></td>
+    	</tr>
+		</table>
+	</div>
+</wicket:extend>

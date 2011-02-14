@@ -1,0 +1,15 @@
+<wicket:panel>
+<form wicket:id="searchform" autocomplete=off>
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		</div>
+		<div id="errormsg2"><span wicket:id="feedback"></span></div>
+		<div id="search">
+		<span>Student's ID #</span>
+		<input type="text" wicket:id="idpart1"  size=5 maxlength=4> -
+		<input type="text" wicket:id="idpart2"  size=5 maxlength=4> 
+		<input wicket:id="search" type="submit" class="button" value="submit">
+		</div>
+		<br/>
+</form> 
+</wicket:panel>

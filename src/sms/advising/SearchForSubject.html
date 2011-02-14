@@ -1,0 +1,91 @@
+<wicket:extend>
+<div id="dataForm" align=center>
+<div align=right>
+	<form wicket:id="form1">
+	<input wicket:id="done" class="button" type="submit" value="DONE"/>
+	</form>
+</div>
+<h2>Registration</h2>
+<p>SY: <span wicket:id="sy"></span><br/>
+Semester: <span wicket:id="sem"></span><br/></p>
+
+<table id="infoTable">
+	<tr>
+		<th colspan=2 align=center id="tableh"><span>Student Information</span></th>
+	</tr>
+	<tr>
+		<th align=left>Student ID</th>
+		<td><span wicket:id="student_id"></span></td>
+	</tr>
+	<tr>
+		<th align=left>First Name</th>
+		<td><span wicket:id="fname"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Middle Name</th>
+		<td><span wicket:id="mname"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Last Name</th>
+		<td><span wicket:id="lname"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Program Taken</th>
+		<td><span wicket:id="program"></span></td>
+	</tr>
+	<tr>
+		<th align=left>Year</th>
+		<td><span wicket:id="year"></span></td>
+	</tr>
+</table>
+<br/><br/><br/>
+
+<form wicket:id="controlledForm">
+<table id="dataTable" width="100%">
+	<tr class="tableHeader">
+		<td colspan=7 align=center>Controlled Subjects</td>
+	</tr>
+	<tr>
+		<th>Subject</th>
+		<th>Section</th>
+		<th>Time</th>
+		<th>Day</th>
+		<th>Room</th>
+		<th>Units</th>
+		<th></th>
+	</tr>
+	<span wicket:id="group">
+	<tr wicket:id="record">
+		<td wicket:id="subject_name"></td>
+		<td wicket:id="subject_section"></td>
+		<td wicket:id="time"></td>
+		<td wicket:id="day"></td>
+		<td wicket:id="room"></td>
+		<td wicket:id="units"></td>
+		<!-- <td><input type="radio" wicket:id="selected" /></td> -->
+		<td><input type="checkbox" wicket:id="checkbox"/></td>
+	</tr>
+	</span>
+	<tr>
+		<td colspan=7 align=right>Total units: <span wicket:id="totalunits"></span></td>
+	</tr>
+	<tr>
+		<td colspan=7 align=right>
+			<input type="submit" class="button" wicket:id="remove" value="remove"/>
+		</td>
+	</tr>
+</table>
+</form>
+<br/><br/>
+<hr/><br/>
+
+<div class="error" wicket:id="feedback"></div>
+<form wicket:id="form2" autocomplete=off>
+	<i>Subject Search:</i>
+	<input wicket:id="search" type="text" size="50" maxlength=100/>
+	<input wicket:id="searchbutton" class="button" type="submit" value="search"/>
+	<br/><span class="note">*for specific results, follow this syntax: subject_code[space]subject_number (i.e. CSC 100)</span>
+</form>
+<wicket:child/>
+</div>
+</wicket:extend>

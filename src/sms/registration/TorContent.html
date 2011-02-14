@@ -1,0 +1,68 @@
+<wicket:extend>
+<div id="dataForm">
+	<div id="back">
+	<a title="Back" href="javascript:history.go(-1)"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+	</div>
+	<div>
+		<h2 align=center><span wicket:id="student_id"></span></h2>
+		<h3 align=center><span wicket:id="name"></span></h3>
+		<h4 align=center>Overall GPA: <span wicket:id="overallGPA"></span></h4>
+	</div>
+	<br/>
+	<!--
+	<table id="dataTable" width="100%" border="0">
+	<tr>
+		<th>SCHOOL YEAR</th>
+		<th>SEMESTER</th>
+		<th>COURSE NAME</th>
+		<th>SECTION</th>
+		<th>UNITS</th>
+		<th>RATING</th>
+	</tr>
+	<tr wicket:id="record">
+		<td wicket:id="school_year"></td>
+		<td wicket:id="semester"></td>
+		<td wicket:id="subject_name"></td>
+		<td wicket:id="subject_section"></td>
+		<td wicket:id="units"></td>
+		<td wicket:id="rating"></td>
+	</tr>
+	</table> -->
+	
+	<table width="100%" border="0">
+	<tr wicket:id="YearAndSem" style="vertical-align:top;">
+		<!-- <td><b><span wicket:id="year"></span><br/><span wicket:id="sem"></span></b></td> -->
+		 <td>
+			<table id="dataTable" width="100%" border="0">
+			<tr>
+				<th>SCHOOL YEAR</th>
+				<th>SEMESTER</th>
+				<th>GPA</th>
+			</tr>
+			<tr>
+				<td wicket:id="year"></td>
+				<td wicket:id="sem"></td>
+				<td wicket:id="gpa"></td>
+			</tr>
+			</table>
+		</td>
+		<td>
+			<table id="dataTable" width="100%" border="0">
+			<tr>
+				<th style="width:66%;">COURSE NAME</th>
+				<th>SECTION</th>
+				<th>UNITS</th>
+				<th>RATING</th>
+			</tr>
+			<tr wicket:id="record">
+				<td wicket:id="subject_name"></td>
+				<td wicket:id="subject_section"></td>
+				<td wicket:id="units"></td>
+				<td wicket:id="rating"></td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</div>
+</wicket:extend>

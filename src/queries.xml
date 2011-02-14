@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap>
+   <select id="getStudent" parameterClass="myapp.student.Student" resultClass="myapp.student.Student">
+   SELECT STUDENT_ID, FNAME, LNAME, MNAME, EDUC_LEVEL FROM STUDENT
+	WHERE STUDENT_ID = #student_id#
+   </select>
+   
+   <insert id="adviseStudent" parameterClass="myapp.student.Student">
+    INSERT INTO ADVISING(STUDENT_ID, PROGRAM_CODE, YEAR_LEVEL, SCHOOL_YEAR, SEMESTER, SECTION)
+	VALUES (#student_id#, #program_code#, #year_level#, #school_year#, #semester#, #section#)
+   </insert>
+   
+   <select id="getAdvisedStudent" parameterClass="myapp.student.Student" resultClass="myapp.student.Student">
+   SELECT * FROM ADVISING WHERE STUDENT_ID = #student_id# and PROGRAM_CODE = #program_code# 
+   and YEAR_LEVEL = #year_level# and SCHOOL_YEAR = #school_year# and SEMESTER = #semester# 
+   and SECTION = #section#
+   </select>
+   
+   <select id="checkExistence" parameterClass="myapp.student.Student" resultClass="myapp.student.Student">
+    SELECT * FROM ADVISING WHERE STUDENT_ID = #student_id# and SCHOOL_YEAR = #school_year#
+    and SEMESTER = #semester#
+   </select>
+
+   <select id="getProgram" resultClass="String">
+   SELECT PROGRAM_NAME FROM PROGRAM WHERE DEPT_CODE=#dept_code#
+   </select>
+   
+   <select id="getProgramCode" parameterClass="myapp.program.Program" resultClass="Integer">
+   SELECT PROGRAM_CODE FROM PROGRAM WHERE PROGRAM_NAME = #program_name#
+   </select>
+   
+   <select id="lookupInfo" resultClass="myapp.index.LookUp">
+   SELECT * FROM LOOKUP
+   </select>
+   
+   <select id="getProgramName" parameterClass="myapp.program.Program" resultClass="String">
+   SELECT PROGRAM_NAME FROM PROGRAM WHERE PROGRAM_CODE=#program_code#
+   </select> 
+   
+   <select id="verifyIdAndPassword" parameterClass="myapp.user.Employee" resultClass="myapp.user.Employee">
+   SELECT EMPLOYEE_ID, PASSWORD FROM SYSTEM_USER 
+   WHERE EMPLOYEE_ID=#employee_id# AND PASSWORD=#password#
+   </select>
+   
+   <select id="getEmployeeInfo" parameterClass="myapp.user.Employee" resultClass="myapp.user.Employee">
+   SELECT A.EMPLOYEE_ID as EMPLOYEE_ID, B.PASSWORD as PASSWORD, WORK_TYPE, COST_CENTER, B.ROLE_ID as ROLE_ID
+   FROM EMPLOYEE AS A JOIN 
+   (SELECT * from SYSTEM_USER JOIN
+   USER_ROLE ON SYSTEM_USER.EMPLOYEE_ID = #employee_id# AND USER_ROLE.EMPLOYEE_ID = #employee_id#) AS B 
+   ON A.EMPLOYEE_ID = #employee_id# AND A.EMPLOYEE_ID = B.EMPLOYEE_ID
+   </select>
+   
+   	<select id="getSubject" parameterClass="myapp.subject.Subject" resultClass="String">
+   	SELECT SUBJECT_NAME FROM SUBJECT
+   	</select>
+   
+   	<select id="getSubjectCode" parameterClass="myapp.subject.Subject" resultClass="Integer">
+	SELECT SUBJECT_CODE 
+	FROM SUBJECT 
+	WHERE 
+	SUBJECT_NAME=#subject_name#
+	</select>
+
+	<select id="getSubjectOffered" parameterClass="myapp.subject.Subject" resultClass="myapp.subject.Subject">
+	SELECT OFFERED_ID, SUBJECT_OFFERED.SUBJECT_CODE, 
+	SUBJECT_SECTION, TIME, DAY, ROOM, SLOT, UNITS,
+    (SELECT PROGRAM_NAME FROM PROGRAM
+     WHERE PROGRAM.PROGRAM_CODE=SUBJECT_OFFERED.PROGRAM_CODE) AS PROGRAM_NAME, 
+    (SELECT DEPT_NAME FROM DEPARTMENT
+     WHERE DEPARTMENT.DEPT_CODE=SUBJECT_OFFERED.DEPT_CODE) AS DEPT_NAME, 
+    (SELECT COLLEGE_NAME FROM COLLEGE        
+     WHERE COLLEGE.COLLEGE_CODE=SUBJECT_OFFERED.COLLEGE_CODE) AS COLLEGE_NAME
+	FROM SUBJECT_OFFERED, SUBJECT
+	WHERE 
+	SUBJECT_OFFERED.SUBJECT_CODE=#subject_code# AND
+	SCHOOL_YEAR = #school_year# AND
+	SEMESTER = #semester# AND
+	SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE
+	</select>
+
+	<select id="getRecord" parameterClass="myapp.student.Student" resultClass="myapp.subject.Subject">
+	SELECT REGISTRATION_RECORD.RECORD_ID, SUBJECT_NAME, 
+	SUBJECT_OFFERED.OFFERED_ID, SUBJECT_SECTION, TIME, DAY, ROOM, UNITS
+	FROM REGISTRATION_RECORD, SUBJECT_OFFERED, SUBJECT
+	WHERE
+	REGISTRATION_RECORD.STUDENT_ID=#student_id# AND
+	REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID AND
+	SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE AND
+	SUBJECT_OFFERED.SCHOOL_YEAR=#school_year# AND
+	SUBJECT_OFFERED.SEMESTER=#semester#
+	</select>
+	
+	<delete id="delRecord" parameterClass="myapp.student.Student">
+	DELETE FROM REGISTRATION_RECORD 
+	WHERE RECORD_ID=#record_id# AND
+	STUDENT_ID=#student_id#
+	</delete>
+	
+	<insert id="controlSubject" parameterClass="myapp.student.Student">
+	INSERT INTO REGISTRATION_RECORD
+	(STUDENT_ID, OFFERED_ID)
+	VALUES (#student_id#, #offered_id#)
+	</insert>
+	
+	<select id="checkSubject" parameterClass="myapp.student.Student" resultClass="myapp.subject.Subject">
+	SELECT REGISTRATION_RECORD.OFFERED_ID, 
+	SUBJECT_CODE, SUBJECT_SECTION, SCHOOL_YEAR, SEMESTER
+	FROM REGISTRATION_RECORD, SUBJECT_OFFERED
+	WHERE
+	STUDENT_ID=#student_id# AND
+	SEMESTER=#semester# AND
+	SCHOOL_YEAR=#school_year# AND 
+	SUBJECT_CODE=#subject_code# AND
+	REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID 
+	</select>
+	
+	<update id="decSlot" parameterClass="myapp.student.Student">
+	UPDATE SUBJECT_OFFERED
+	SET SLOT=(SELECT SLOT-1 FROM SUBJECT_OFFERED WHERE OFFERED_ID=#offered_id#)
+	WHERE OFFERED_ID=#offered_id#
+	</update>
+	
+	<update id="incSlot" parameterClass="myapp.student.Student">
+	UPDATE SUBJECT_OFFERED
+	SET SLOT=(SELECT SLOT+1 FROM SUBJECT_OFFERED WHERE OFFERED_ID=#offered_id#)
+	WHERE OFFERED_ID=#offered_id#
+	</update>
+	
+</sqlMap>

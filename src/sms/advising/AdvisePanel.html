@@ -1,0 +1,52 @@
+<wicket:panel>
+<form wicket:id="adviseform" autocomplete=off>
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		</div>
+		<br/><div id="errormsg2"><span wicket:id="error"></span></div><br/>
+		
+		<table border=0>
+			<tr>
+				<th>ID number</th>
+				<td><input class="idfield" wicket:id="idpart1" type="text" size=4 maxlength=4 /> - 
+					<input class="idfield" wicket:id="idpart2" type="text" size=4 maxlength=4 /></td>
+			</tr>
+			<tr>
+				<th>First Name</th>
+				<td><input class="tfield" wicket:id="fname" type="text" size=30 maxlength=40/></td>
+			</tr>
+			<tr>
+				<th>Middle Name</th>
+				<td><input class="tfield" wicket:id="mname" type="text" size=30 maxlength=40/></td>
+			</tr>
+			<tr>
+				<th>Last Name</th>
+				<td><input class="tfield" wicket:id="lname" type="text" size=30 maxlength=40/></td>
+			</tr>
+			<tr>
+				<th>Program</th>
+				<td><select class="dropdown" wicket:id="program_name"></select></td>
+			</tr>
+			<tr>
+				<th>Year Level</th>
+				<!--<td><input class="tfield" wicket:id="year_level" type="text" size=30 maxlength=1/></td>-->
+				<td><select class="idfield" wicket:id="year_level"></select></td>
+			</tr>
+			<tr>
+				<th><span wicket:id="section_label">Section</span></th>
+				<td><input wicket:id="section" class="tfield" type="text" size=30 maxlength=30/></td>
+			</tr>
+			<tr>
+				<th>School Year</th>
+				<td><input wicket:id="school_year" class="tfield" type="text" size=30 maxlength=10/></td>
+			</tr>
+			<tr>
+				<th><span wicket:id="semester_label">Semester</span></th>
+				<td><input wicket:id="semester" class="tfield" type="text" size=30 maxlength=15/></td>
+			</tr>
+			<tr>
+				<td colspan=2 align=right><input class="button" wicket:id="advise" type="submit" value="Advise"/></td>
+			</tr>
+		</table>
+		</form>
+</wicket:panel>

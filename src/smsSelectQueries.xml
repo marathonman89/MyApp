@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<select id="getUserInfo" parameterClass="sms.user.Employee" resultClass="sms.user.Employee">
+		SELECT 
+    		SYSTEM_USER.EMPLOYEE_ID, FNAME, LNAME, MNAME, ACCT_STATUS
+		FROM
+	    	SYSTEM_USER, EMPLOYEE
+		WHERE
+    		SYSTEM_USER.EMPLOYEE_ID = #employee_id# AND     
+    		EMPLOYEE.EMPLOYEE_ID = #employee_id# AND     
+    		PASSWORD = #password#
+   </select>
+   
+   <select id="getUserRoles" parameterClass="sms.user.Employee" resultClass="sms.user.Employee">
+   		SELECT
+    		USER_ROLE.ROLE_ID, ROLE_NAME 
+		FROM
+    		USER_ROLE, ROLE    
+		WHERE
+     		EMPLOYEE_ID=#employee_id# AND     
+     		USER_ROLE.ROLE_ID = ROLE.ROLE_ID
+     	ORDER BY ROLE_NAME ASC
+   </select>
+   
+   <select id="getEnrollmentStatus" resultClass="sms.lookup.Lookup">
+	   	SELECT 
+	   		YEAR_STARTED, SEM_STARTED
+		FROM 
+			LOOKUP
+   </select>
+   <select id="getAllLookupStatus" resultClass="sms.lookup.Lookup">
+   		SELECT 
+	   		*
+		FROM 
+			LOOKUP
+   </select>
+   <select id="getEnr_On" resultClass="sms.lookup.Lookup">
+	   	SELECT 
+	   		ENR_ON
+		FROM 
+			LOOKUP
+   </select>
+   <select id="LogFileName" resultClass="java.lang.String">
+   	SELECT 
+   		LOG_FILE_USED
+	FROM
+		LOOKUP
+   </select>
+   <select id="getPrograms" parameterClass="sms.user.Employee" resultClass="sms.program.Program">
+   		SELECT 
+   			PROGRAM_NAME, PROGRAM_CODE
+		FROM 
+			PROGRAM, EMPLOYEE, DEPARTMENT
+		WHERE 
+			EMPLOYEE_ID = #employee_id# AND
+      		 DEPARTMENT.DEPT_CODE = #cost_center# AND
+      		 PROGRAM.DEPT_CODE = #cost_center#
+   </select>
+   
+   <select id="getCostCenter" parameterClass="sms.user.Employee" resultClass="sms.user.Employee">
+   		SELECT
+   			COST_CENTER, EMPLOYEE_ID,
+   			FNAME, LNAME, MNAME
+   		FROM
+   			EMPLOYEE
+   		WHERE
+   			EMPLOYEE_ID=#employee_id#
+   </select>
+   
+   <select id="getBelongedDept" parameterClass="sms.user.Employee" resultClass="sms.department.Department">
+   		SELECT
+   			DEPT_CODE, DEPT_NAME, COLLEGE_CODE
+   		FROM
+   			DEPARTMENT
+   		WHERE
+   			DEPT_CODE=#cost_center#
+   </select>
+   
+   <select id="getAdvisedData" parameterClass="sms.student.Student" resultClass="sms.student.Student">
+   		SELECT *
+		FROM 
+			ADVISING 
+		WHERE 
+			STUDENT_ID=#student_id# AND
+      		SCHOOL_YEAR=#school_year# AND 
+      		SEMESTER=#semester#
+   </select>
+   
+   <select id="getStudentProfile" parameterClass="sms.student.Student" resultClass="sms.student.Student">
+   		SELECT 
+   			STUDENT_ID, FNAME, LNAME, MNAME, BDATE, BARANGAY, 
+   			MUNICIPALITY, PROVINCE, GENDER, EDUC_LEVEL
+   		FROM 
+   			STUDENT
+   		WHERE
+   			STUDENT_ID=#student_id#
+   </select>
+
+   <select id="registrationInfo" parameterClass="sms.student.Student" resultClass="sms.student.Student">
+   		SELECT
+  			STUDENT.STUDENT_ID, FNAME, LNAME, MNAME,  
+  			PROGRAM_CODE, YEAR_LEVEL, SECTION
+		FROM
+  			ADVISING, STUDENT
+		WHERE
+  			STUDENT.STUDENT_ID = #student_id# AND    
+  			STUDENT.STUDENT_ID = ADVISING.STUDENT_ID AND
+  			SCHOOL_YEAR = #school_year# AND  
+  			SEMESTER = #semester#
+   </select>
+   
+   <select id="getProgramFromCode" parameterClass="sms.program.Program" resultClass="sms.program.Program">
+   		SELECT *
+   		FROM
+   			PROGRAM
+   		WHERE
+   			PROGRAM_CODE=#program_code#
+   </select>
+   
+   <select id="getOfferedSubject" parameterClass="sms.subject.Subject" resultClass="sms.subject.Subject">
+   	 	SELECT 
+   	 			SUBJECT.SUBJECT_CODE, SUBJECT.SUBJECT_NAME,
+				OFFERED_ID, SUBJECT_SECTION, TIME, DAY, ROOM, SEMESTER,
+				SCHOOL_YEAR, PROGRAM_CODE, SLOT, EMPLOYEE_ID
+		FROM 
+				SUBJECT, SUBJECT_OFFERED
+		WHERE 
+				SUBJECT.SUBJECT_NAME LIKE '%$subject_name$%'
+				AND SUBJECT.SUBJECT_CODE = SUBJECT_OFFERED.SUBJECT_CODE AND
+				SCHOOL_YEAR = #school_year# AND SEMESTER = #semester#
+		ORDER BY SUBJECT_NAME ASC
+   </select>
+   
+   <select id="getDeptFromDeptCode" parameterClass="sms.subject.Subject" resultClass="java.lang.String">
+   		SELECT 
+   			DEPT_NAME
+		FROM 
+			SUBJECT, DEPARTMENT, SUBJECT_OFFERED
+		WHERE 
+			SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE AND
+			SUBJECT_OFFERED.DEPT_CODE = DEPARTMENT.DEPT_CODE AND
+			OFFERED_ID=#offered_id#
+   </select>
+   
+   <select id="getColFromColCode" parameterClass="sms.subject.Subject" resultClass="java.lang.String">
+   		SELECT 
+   			COLLEGE_NAME
+		FROM 
+			SUBJECT, COLLEGE, SUBJECT_OFFERED
+		WHERE 
+			SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE AND
+			SUBJECT_OFFERED.COLLEGE_CODE = COLLEGE.COLLEGE_CODE AND
+			OFFERED_ID=#offered_id#
+   </select>
+   <select id="getProgFromProgCode" parameterClass="sms.subject.Subject" resultClass="java.lang.String">
+   		SELECT 
+   			PROGRAM_NAME
+		FROM 
+			SUBJECT, PROGRAM, SUBJECT_OFFERED
+		WHERE 
+			SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE AND
+			SUBJECT_OFFERED.PROGRAM_CODE = PROGRAM.PROGRAM_CODE AND
+			OFFERED_ID=#offered_id#
+   </select>
+   <!--
+   <select id="getSpecificRecord" parameterClass="sms.student.Student" resultClass="sms.student.Student">
+   		SELECT
+   			OFFERED_ID
+   		FROM
+   			REGISTRATION_RECORD
+   		WHERE
+   			OFFERED_ID=#offered_id# AND
+   			STUDENT_ID=#student_id#
+   </select> -->
+   <select id="studentRecord" parameterClass="sms.student.Student" resultClass="sms.subject.Subject">
+   		SELECT 
+   			REGISTRATION_RECORD.RECORD_ID, SUBJECT_NAME, 
+			SUBJECT_OFFERED.OFFERED_ID, SUBJECT_SECTION, 
+			TIME, DAY, ROOM, UNITS, SUBJECT.SUBJECT_CODE
+		FROM 
+			REGISTRATION_RECORD, SUBJECT_OFFERED, SUBJECT
+		WHERE
+			REGISTRATION_RECORD.STUDENT_ID=#student_id# AND
+			REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID AND
+			SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE AND
+			SUBJECT_OFFERED.SCHOOL_YEAR=#school_year# AND
+			SUBJECT_OFFERED.SEMESTER=#semester# AND
+			SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE
+   </select>
+   <select id="isRegistered" parameterClass="sms.student.Student" resultClass="Integer">
+		SELECT COUNT(*) 
+		FROM 
+			REGISTRATION_RECORD, 
+			SUBJECT_OFFERED 
+		WHERE 
+			student_id = #student_id# AND 
+			REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID AND 
+			SCHOOL_YEAR = #school_year# AND 
+			SEMESTER=#semester#
+	</select>
+   <select id="getControllableSubjects" parameterClass="sms.student.Student" resultClass="sms.subject.Subject">
+		SELECT C.OFFERED_ID  as OFFERED_ID
+		FROM 
+			ADVISING as A, 
+			CURRICULUM as B,
+			SUBJECT_OFFERED as C
+		WHERE
+			A.PROGRAM_CODE = B.PROGRAM_CODE AND
+			A.YEAR_LEVEL = B.YEAR_LEVEL     AND
+			A.SCHOOL_YEAR = C.SCHOOL_YEAR   AND
+			A.SEMESTER = C.SEMESTER         AND
+			B.SUBJECT_CODE = C.SUBJECT_CODE AND
+			A.PROGRAM_CODE = #program_code# AND
+			A.SCHOOL_YEAR = #school_year#   AND
+			A.SEMESTER = #semester#			AND
+			A.YEAR_LEVEL = #year_level#     AND
+			C.SUBJECT_SECTION = #section#
+	</select>
+	<select id="getSecondaryStudentRecord" resultClass="sms.subject.Subject" parameterClass="sms.student.Student">
+		SELECT 
+			REGISTRATION_RECORD.RECORD_ID, SUBJECT_NAME, 
+			SUBJECT_OFFERED.OFFERED_ID, SUBJECT_SECTION, TIME, DAY, ROOM
+		FROM 
+			REGISTRATION_RECORD, SUBJECT_OFFERED, SUBJECT
+		WHERE
+			REGISTRATION_RECORD.STUDENT_ID=#student_id# AND
+			REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID AND
+			SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE AND
+			SUBJECT_OFFERED.SCHOOL_YEAR=#school_year# AND
+			SUBJECT_OFFERED.SEMESTER=#semester#
+		ORDER BY TIME DESC
+	</select>
+	<select id="getDeptOfEmployee" parameterClass="sms.user.Employee" resultClass="java.lang.String">
+		SELECT 
+			DEPT_NAME 
+		FROM
+			EMPLOYEE, DEPARTMENT 
+		WHERE
+			EMPLOYEE_ID=#employee_id# and 
+			COST_CENTER=DEPT_CODE
+	</select>
+	<select id="getHandledSubjects" parameterClass="sms.user.Employee" resultClass="sms.subject.Subject">
+		SELECT 
+			SUBJECT_OFFERED.SUBJECT_CODE, SUBJECT_SECTION, SUBJECT_NAME,       
+       		TIME,DAY, ROOM, OFFERED_ID, SEMESTER, SCHOOL_YEAR
+		FROM
+			SUBJECT_OFFERED, SUBJECT
+		WHERE
+			EMPLOYEE_ID=#employee_id# AND
+			SEMESTER = #semester# AND
+			SCHOOL_YEAR = #school_year# AND
+			SUBJECT_OFFERED.SUBJECT_CODE = SUBJECT.SUBJECT_CODE
+	</select>
+	<select id="getEnrolledStudents" parameterClass="sms.subject.Subject" resultClass="sms.student.Student">
+		SELECT 
+			SUBJECT_OFFERED.OFFERED_ID, RATING, FNAME, 
+			LNAME, MNAME, STUDENT.STUDENT_ID, RECORD_ID
+		FROM 
+			SUBJECT_OFFERED, REGISTRATION_RECORD, STUDENT
+		WHERE
+			SUBJECT_OFFERED.OFFERED_ID = REGISTRATION_RECORD.OFFERED_ID AND
+			REGISTRATION_RECORD.STUDENT_ID = STUDENT.STUDENT_ID AND
+			SUBJECT_OFFERED.OFFERED_ID = #offered_id#
+	</select>
+	<select id="isGradingSheetLocked" parameterClass="sms.subject.Subject" resultClass="java.lang.Boolean">
+		SELECT 
+			GRADING_SHEET_LOCK
+		FROM 
+			SUBJECT_OFFERED
+		WHERE 
+			OFFERED_ID = #offered_id# 
+	</select>
+	<select id="subjectOffered" parameterClass="sms.user.Employee" resultClass="sms.subject.Subject">
+		SELECT 
+			SUBJECT.SUBJECT_CODE, SUBJECT.SUBJECT_NAME,
+			OFFERED_ID, SUBJECT_SECTION, TIME, DAY, ROOM, SEMESTER,
+			SCHOOL_YEAR, PROGRAM_CODE, SLOT, EMPLOYEE_ID
+		FROM 
+			SUBJECT, SUBJECT_OFFERED
+		WHERE 
+		SUBJECT.SUBJECT_CODE = SUBJECT_OFFERED.SUBJECT_CODE AND
+		SCHOOL_YEAR = #school_year# AND SEMESTER = #semester#
+		ORDER BY SUBJECT_NAME ASC
+	</select>
+	<select id="SystemUsers" resultClass="sms.user.Employee">
+		SELECT
+			*
+		FROM
+			SYSTEM_USER
+		ORDER BY EMPLOYEE_ID ASC
+	</select>
+	<select id="SystemUsersWithParam" parameterClass="sms.user.Employee" resultClass="sms.user.Employee">
+		SELECT
+			*
+		FROM
+			SYSTEM_USER
+		WHERE
+			EMPLOYEE_ID LIKE '%$employee_id$%'
+		ORDER BY EMPLOYEE_ID ASC
+	</select>
+	<select id="accountStatus" parameterClass="sms.user.Employee" resultClass="java.lang.String">
+		SELECT
+			ACCT_STATUS
+		FROM
+			SYSTEM_USER
+		WHERE
+			EMPLOYEE_ID=#employee_id#
+	</select>
+	<select id="userRoles" parameterClass="sms.user.Employee" resultClass="sms.user.Employee">
+		SELECT
+    		EMPLOYEE_ID, USER_ROLE.ROLE_ID, ROLE_NAME    
+		FROM
+    		USER_ROLE, ROLE    
+		WHERE
+     		USER_ROLE.ROLE_ID = ROLE.ROLE_ID AND
+     		EMPLOYEE_ID = #employee_id#
+	</select>
+	<select id="roleId" parameterClass="sms.Role.Role" resultClass="java.lang.Integer">
+		SELECT
+			ROLE_ID
+		FROM 
+			ROLE
+		WHERE
+			ROLE.ROLE_NAME = #role_name#
+	</select>
+	<select id="getSpecificRoleId" parameterClass="sms.user.Employee" resultClass="sms.user.Employee">
+		SELECT
+			ROLE_ID, EMPLOYEE_ID
+		FROM 
+			USER_ROLE
+		WHERE
+			ROLE_ID = #role_id# AND
+			EMPLOYEE_ID = #employee_id#
+	</select>
+	<select id="getRanks" resultClass="sms.rank.Rank">
+		SELECT 
+			*
+		FROM 
+			RANK
+		ORDER BY RANK_NAME ASC
+	</select>
+	<select id="getColleges" resultClass="sms.college.College">
+		SELECT 
+			COLLEGE_CODE, COLLEGE_NAME
+		FROM
+			COLLEGE
+	</select>
+	<select id="getDepartments" resultClass="sms.department.Department">
+		SELECT 
+			DEPT_CODE, DEPT_NAME, COLLEGE_CODE
+		FROM 
+			DEPARTMENT
+	</select>
+	<select id="numberOfEntries" parameterClass="sms.user.Employee" resultClass="java.lang.Integer">
+		SELECT 
+			COUNT(*) as NUMOFENTRY
+		FROM 
+			EMPLOYEE
+		WHERE 
+			EMPLOYEE_ID=#employee_id#
+	</select>
+	<select id="getFaculties" resultClass="sms.user.Employee">
+		SELECT 
+       		EMPLOYEE_ID, FNAME, LNAME, MNAME, 
+       		DEPARTMENT.DEPT_CODE, DEPT_NAME,
+       		ADDRESS, BDATE, GENDER, RANK_NAME,
+       		COLLEGE.COLLEGE_CODE, COLLEGE_NAME,
+       		EMAIL_ADDRESS    
+		FROM 
+       		EMPLOYEE, COLLEGE, DEPARTMENT, RANK
+		WHERE
+       		COST_CENTER = DEPARTMENT.DEPT_CODE AND     
+     		DEPARTMENT.COLLEGE_CODE = COLLEGE.COLLEGE_CODE AND
+			EMPLOYEE.RANK = RANK.RANK_ID
+     	ORDER BY LNAME ASC
+	</select>
+	<select id="getFacultiesWithParam" parameterClass="sms.user.Employee" resultClass="sms.user.Employee">
+		SELECT 
+			EMPLOYEE_ID, FNAME, LNAME, MNAME, 
+			DEPARTMENT.DEPT_CODE, DEPT_NAME,
+			ADDRESS, BDATE, GENDER, RANK_NAME,
+			COLLEGE.COLLEGE_CODE, COLLEGE_NAME,
+			EMAIL_ADDRESS            
+		FROM 
+			EMPLOYEE, COLLEGE, DEPARTMENT, RANK
+		WHERE
+			(FNAME LIKE '%$lname$%' OR
+			 LNAME LIKE '%$lname$%' OR
+			 MNAME LIKE '%$lname$%') AND
+			COST_CENTER = DEPARTMENT.DEPT_CODE AND     
+			DEPARTMENT.COLLEGE_CODE = COLLEGE.COLLEGE_CODE AND
+			EMPLOYEE.RANK = RANK.RANK_ID
+		ORDER BY LNAME ASC 
+	</select>
+	<select id="getStudentWithRecords" resultClass="sms.student.Student">
+		SELECT
+    		STUDENT.STUDENT_ID, FNAME, LNAME, MNAME, EDUC_LEVEL    
+		FROM
+    		STUDENT, REGISTRATION_RECORD    
+		WHERE
+     		STUDENT.STUDENT_ID = REGISTRATION_RECORD.STUDENT_ID     
+		GROUP BY STUDENT.STUDENT_ID
+		ORDER BY LNAME, FNAME	
+	</select>
+	<select id="getStudentTor" parameterClass="sms.student.Student" resultClass="sms.subject.Subject">
+		SELECT     
+       		SUBJECT_SECTION, SUBJECT_NAME,
+       		SCHOOL_YEAR, SEMESTER, UNITS, RATING
+		FROM
+       		REGISTRATION_RECORD, SUBJECT_OFFERED, SUBJECT     
+		WHERE
+       		REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID       
+       		AND SUBJECT.SUBJECT_CODE = SUBJECT_OFFERED.SUBJECT_CODE       
+       		AND REGISTRATION_RECORD.STUDENT_ID = #student_id#
+       		AND SCHOOL_YEAR = #school_year# AND SEMESTER=#semester#
+	</select>
+	<select id="getStudentTorWithIDasParam" parameterClass="sms.student.Student" resultClass="sms.subject.Subject">
+		SELECT     
+			RATING
+		FROM
+       		REGISTRATION_RECORD, SUBJECT_OFFERED, SUBJECT     
+		WHERE
+       		REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID       
+       		AND SUBJECT.SUBJECT_CODE = SUBJECT_OFFERED.SUBJECT_CODE       
+       		AND REGISTRATION_RECORD.STUDENT_ID = #student_id#
+	</select>
+	<select id="getYearAndSemesterOfTor" parameterClass="sms.student.Student" resultClass="sms.subject.Subject">
+		SELECT     
+
+       		SCHOOL_YEAR, SEMESTER
+		FROM
+       		REGISTRATION_RECORD, SUBJECT_OFFERED, SUBJECT     
+		WHERE
+       		REGISTRATION_RECORD.OFFERED_ID = SUBJECT_OFFERED.OFFERED_ID       
+       		AND SUBJECT.SUBJECT_CODE = SUBJECT_OFFERED.SUBJECT_CODE       
+       		AND REGISTRATION_RECORD.STUDENT_ID = #student_id#
+		GROUP BY SCHOOL_YEAR, SEMESTER
+	</select>
+	<select id="getStudents" resultClass="sms.student.Student">
+		SELECT 
+       		STUDENT.STUDENT_ID, FNAME, LNAME, MNAME, 
+       		DEPARTMENT.DEPT_CODE, DEPT_NAME,
+       		BARANGAY, MUNICIPALITY, PROVINCE,
+       		BDATE, GENDER, COLLEGE.COLLEGE_CODE,
+       		COLLEGE_NAME    
+		FROM 
+       		STUDENT, COLLEGE, DEPARTMENT, PROGRAM, ADVISING
+		WHERE
+		    
+			PROGRAM.DEPT_CODE = DEPARTMENT.DEPT_CODE AND     
+     		DEPARTMENT.COLLEGE_CODE = COLLEGE.COLLEGE_CODE AND     
+            ADVISING.PROGRAM_CODE = PROGRAM.PROGRAM_CODE AND
+			STUDENT.STUDENT_ID = ADVISING.STUDENT_ID
+			
+		ORDER BY LNAME ASC 
+	</select>
+	<select id="getStudentsWithParam" parameterClass="sms.student.Student" resultClass="sms.student.Student">
+		SELECT 
+       		STUDENT.STUDENT_ID, FNAME, LNAME, MNAME, 
+       		DEPARTMENT.DEPT_CODE, DEPT_NAME,
+       		BARANGAY, MUNICIPALITY, PROVINCE,
+       		BDATE, GENDER, COLLEGE.COLLEGE_CODE,
+       		COLLEGE_NAME    
+		FROM 
+       		STUDENT, COLLEGE, DEPARTMENT, PROGRAM, ADVISING
+		WHERE
+		    (FNAME LIKE '%$lname$%' OR
+			 LNAME LIKE '%$lname$%' OR
+			 MNAME LIKE '%$lname$%') AND
+			PROGRAM.DEPT_CODE = DEPARTMENT.DEPT_CODE AND     
+     		DEPARTMENT.COLLEGE_CODE = COLLEGE.COLLEGE_CODE AND     
+            ADVISING.PROGRAM_CODE = PROGRAM.PROGRAM_CODE AND
+			STUDENT.STUDENT_ID = ADVISING.STUDENT_ID
+			
+		ORDER BY LNAME ASC 
+	</select>
+	<select id="getScholarship" parameterClass="sms.scholarship.Scholarship" resultClass="sms.scholarship.Scholarship">
+		SELECT
+			SCHOLARSHIP_CODE, SCHOLARSHIP_NAME
+		FROM
+			SCHOLARSHIP
+	</select>
+	<select id="getStudentScholar" resultClass="sms.scholarship.Scholarship">
+		SELECT
+			STUD_SCHOLARSHIP.STUDENT_ID, LNAME, FNAME, MNAME, SCHOLARSHIP_NAME, SCHOLARSHIP_STATUS
+		FROM
+			STUD_SCHOLARSHIP, STUDENT, SCHOLARSHIP
+		WHERE
+			STUDENT.STUDENT_ID = STUD_SCHOLARSHIP.STUDENT_ID AND
+			STUD_SCHOLARSHIP.SCHOLARSHIP_CODE = SCHOLARSHIP.SCHOLARSHIP_CODE 
+	</select>
+	<select id="getStudentScholarshipWithParam" parameterClass="sms.scholarship.Scholarship" resultClass="sms.scholarship.Scholarship">
+		SELECT
+			STUD_SCHOLARSHIP.STUDENT_ID, LNAME, FNAME, MNAME, SCHOLARSHIP_NAME, SCHOLARSHIP_STATUS
+		FROM
+			STUD_SCHOLARSHIP, STUDENT, SCHOLARSHIP
+		WHERE
+			(FNAME LIKE '%$lname$%' OR
+			 LNAME LIKE '%$lname$%' OR
+			 MNAME LIKE '%$lname$%') AND
+			STUDENT.STUDENT_ID = STUD_SCHOLARSHIP.STUDENT_ID AND
+			STUD_SCHOLARSHIP.SCHOLARSHIP_CODE = SCHOLARSHIP.SCHOLARSHIP_CODE 
+		
+	</select>
+	<select id="numberOfStudentEntries" parameterClass="sms.student.Student" resultClass="java.lang.Integer">
+		SELECT 
+			COUNT(*) as NUMOFENTRY
+		FROM 
+			STUDENT
+		WHERE 
+			STUDENT_ID=#student_id#
+	</select>
+	<select id="countScholars" parameterClass="sms.student.Student" resultClass="java.lang.Integer">
+		SELECT 
+			COUNT(*) as NUMOFENTRY
+		FROM 
+			STUD_SCHOLARSHIP
+	</select>
+	<select id="getEnrolledStudent" parameterClass="sms.student.Student" resultClass="sms.student.Student">
+		SELECT STUDENT_ID
+		FROM ADVISING, LOOKUP
+        WHERE  LOOKUP.year_started = ADVISING.SCHOOL_YEAR AND            
+               LOOKUP.SEM_STARTED = ADVISING.SEMESTER AND                 
+               LOOKUP.ENR_ON AND
+               STUDENT_ID = #student_id#
+	</select>
+	<select id="numberOfEntry" parameterClass="sms.student.Student" resultClass="java.lang.Integer">
+		SELECT 
+			COUNT(*) as NUMOFENTRY
+		FROM 
+			STUDENT
+		WHERE 
+			STUDENT_ID=#student_id#
+	</select>
+</sqlMap>

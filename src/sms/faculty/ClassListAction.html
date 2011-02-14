@@ -1,0 +1,52 @@
+<wicket:extend>
+<div id="dataForm">
+	<!--
+	<form wicket:id="backform">
+		<div align=right><input wicket:id="back" class="button" type="submit" value="Back"/></div>
+	</form> -->
+	<div id="back">
+		<a href="javascript:history.go(-1)" title="back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+	</div>
+	<table style="font-weight:lighter;" align=center border="0">
+		<tr>
+			<td colspan=2 align=center b><h2>Enrolled Students</h2></td>
+		</tr>
+		<tr>
+			<td>Subject Code: </td> <td><span wicket:id="subject_code"></span></td></tr>
+		<tr>
+			<td>Description: </td><td><span wicket:id="subject_name"></span></td></tr>
+		<tr>
+			<td>Section: </td><td><span wicket:id="subject_section"></span></td></tr>
+		<tr>
+			<td>Day: </td><td><span wicket:id="day"></span> </td></tr>
+		<tr>
+			<td>Time: </td><td><span wicket:id="time"></span> </td></tr>
+		<tr>
+			<td>Room: </td><td><span wicket:id="room"></span> </td></tr>
+		<tr>
+			<td>School Year: </td><td><span wicket:id="school_year"></span></td></tr>
+		<tr>
+			<td>Semester: </td><td><span wicket:id="semester"></span> </td></tr>
+	</table>
+	<br/><br/>
+
+	<form wicket:id="enrolledstudents">
+	<table border="0" width="60%" id="dataTable" align=center>
+		<tr>
+			<th >ID Number</th>
+			<th >Name</th>
+		</tr>
+		<tr wicket:id="enrolled">
+			<td><span wicket:id="student_id"></span></td>
+			<td><span wicket:id="name"></span></td>
+		</tr>
+		<tr>
+			<td colspan=3 align=right>
+				<i><h4 align=center wicket:id="noentry"></h4></i>
+				<input align=right type="submit" value="Export to CSV" class="button" wicket:id="export" />
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
+</wicket:extend>

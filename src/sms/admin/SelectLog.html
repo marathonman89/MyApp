@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>This is modal window</title>
+        <style type="text/css">         
+            body {
+                font-family: verdana, sans-serif;
+                font-size: 82%;
+                background-color: #f1f1f1;                
+            }
+            table{
+            	
+				font-size: 11px;
+				font-weight: lighter;
+				border-collapse:collapse;
+				border:1px solid green;
+				text-align:left;
+				border: 1px solid #aaa;
+				margin-top:2px;
+			}
+			table th{
+				background-color: #d6d6d6;
+				border: none;
+				width:auto;
+				font-size: 13px;
+				font-family: "Trebuchet MS", Helvetica, sans-serif;
+			}
+			table td{
+				padding-left:5px;
+				padding-right: 10px;
+				border: 1px solid #aaa;
+			}
+			table tr{
+				background-color:#f5f5f5;
+			}
+			p span{
+				font-size: 10px;
+				font-weight: ligther;
+				font-style: italic;
+				color:#cc3333;
+			}
+        </style>
+    </head> 
+    <body>
+    	<p align=center><span wicket:id="usedLogFileLabel"></span></p>
+    	<form wicket:id="form" autocomplete="off">
+    	<table align=center cellspacing="0" width="80%">
+    		<tr>
+    			<th colspan=2>Select Log File</th>
+    		</tr>
+    		<tr>
+    			<th width="90%">Filename</th>
+    			<th width="10%">Action</th>
+    		</tr>
+			<span wicket:id="group">
+			<tr wicket:id="eachFile">
+				<td><span wicket:id="fileName"></span></td>
+				<td><input type="radio" wicket:id="selected" /></td>
+			</tr>
+			</span>
+			<tr>
+				<td colspan=2 align=center><i><h4 style="color: #dd1212;" wicket:id="noentry"></h4></i></td>
+			</tr>
+			<tr>
+				<td colspan=2 align=right><input type="submit" value="SELECT" wicket:id="select" /></td>
+			</tr>
+    	</table>
+    	</form>
+    </body>
+</html>

@@ -1,0 +1,66 @@
+<wicket:extend>
+<div id="dataForm">
+	<div id="back">
+	<a href="javascript:history.go(-1)"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+	</div>
+	<!--
+	<form wicket:id="backform">
+		<div align=right><input wicket:id="back" class="button" type="submit" value="Back"/></div>
+	</form> -->
+	<h2 align=center>Add Student</h2>
+	<br/>
+	<span wicket:id="error"></span>
+	<form wicket:id="studentForm" autocomplete=off>
+	<table id="dataFormTable" align=center width="60%">
+		<tr>
+			<th colspan=2>Personal Information</th>
+		</tr>
+		<tr>
+			<td width="40%">Student ID</td>
+			<td><input wicket:id="part1" type="text" size="5" maxlength="4" /> - 
+			     <input wicket:id="part2" type="text" size="5" maxlength="4" /></td>
+		</tr>
+		<tr>
+			<td>First name</td>
+			<td><input wicket:id="fname" type="text" size="40" maxlength="30" /></td>
+		</tr>
+		<tr>
+			<td>Middle name</td>
+			<td><input wicket:id="mname" type="text" size="40" maxlength="30" /></td>
+		</tr>
+		<tr>
+			<td>Last name</td>
+			<td><input wicket:id="lname" type="text" size="40" maxlength="30" /></td>
+		</tr>
+		<tr>
+			<td>Birthdate</td>
+			<td><input wicket:id="bdate" type="text" size="20" maxlength="10" id="bdate" readonly />
+			</td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			<td><select wicket:id="gender"></select></td>
+		</tr>
+		<tr>
+			<td>Barangay</td>
+			<td><input wicket:id="barangay" type="text" size="40" maxlength="60" /></td>
+		</tr>
+		<tr>
+			<td>Municipality/City</td>
+			<td><input wicket:id="municipality" type="text" size="40" maxlength="60" /></td>
+		</tr>
+		<tr>
+			<td>Province</td>
+			<td><input wicket:id="province" type="text" size="40" maxlength="60" /></td>
+		</tr>
+		<tr>
+			<td>Education Level</td>
+			<td><select wicket:id="educ_level"></select></td>
+		</tr>
+	</table>
+	<br/><br/>
+
+	<div align=right style="width:80%"><input wicket:id="add" class="button" type="submit" value="Add" /></div>
+	</form>
+</div>
+</wicket:extend>

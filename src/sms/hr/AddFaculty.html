@@ -1,0 +1,87 @@
+<wicket:extend>
+<div id="dataForm">
+	<div id="back">
+	<a href="javascript:history.go(-1)"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+	</div>
+	<!--
+	<form wicket:id="backform">
+		<div align=right><input wicket:id="back" class="button" type="submit" value="Back"/></div>
+	</form> -->
+	<h2 align=center>Add Faculty</h2>
+	<br/>
+	<span wicket:id="error"></span>
+	<form wicket:id="facultyForm" autocomplete=off>
+	<table id="dataFormTable" align=center width="60%">
+		<tr>
+			<th colspan=2>Personal Information</th>
+		</tr>
+		<tr>
+			<td width="40%">Faculty ID</td>
+			<td><input wicket:id="part1" type="text" size="5" maxlength="4" /> - 
+			     <input wicket:id="part2" type="text" size="5" maxlength="4" /></td>
+		</tr>
+		<tr>
+			<td>First name</td>
+			<td><input wicket:id="fname" type="text" size="40" maxlength="30" /></td>
+		</tr>
+		<tr>
+			<td>Middle name</td>
+			<td><input wicket:id="mname" type="text" size="40" maxlength="30" /></td>
+		</tr>
+		<tr>
+			<td>Last name</td>
+			<td><input wicket:id="lname" type="text" size="40" maxlength="30" /></td>
+		</tr>
+		<tr>
+			<td>Birthdate</td>
+			<td><input wicket:id="bdate" type="text" size="20" maxlength="10" id="bdate" readonly />
+			</td>
+		</tr>
+		<tr>
+			<td>Address</td>
+			<td><input wicket:id="address" type="text" size="40" maxlength="60" /></td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			<td><select wicket:id="gender"></select></td>
+		</tr>
+		<tr>
+			<td>Email Address</td>
+			<td><input wicket:id="emailaddress" type="text" size="40" maxlength="60" /></td>
+		</tr>
+	</table>
+	<br/><br/>
+	<table id="dataFormTable" align=center width="60%">
+		<tr>
+			<th colspan=2>Academic Rank</th>
+		</tr>
+		<tr>
+			<td width="40%">Rank</td>
+			<td>
+				<select wicket:id="rank"></select>
+			</td>
+		</tr>
+	</table>
+	<br/><br/>
+	<table id="dataFormTable" align=center width="60%">
+		<tr>
+			<th colspan=2>College and Department</th>
+		</tr>
+		<tr>
+			<td width="40%">College</td>
+			<td>
+				<select wicket:id="college"></select>
+			</td>
+		</tr>
+		<tr>
+			<td width="40%">Department</td>
+			<td>
+				<select wicket:id="costcenter"></select>
+			</td>
+		</tr>
+	</table>
+	<br/>
+	<div align=right style="width:80%"><input wicket:id="add" class="button" type="submit" value="Add" /></div>
+	</form>
+</div>
+</wicket:extend>

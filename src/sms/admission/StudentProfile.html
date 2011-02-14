@@ -1,0 +1,47 @@
+<wicket:extend>
+<h3>Enrolled Student Listing</h3>
+	<hr/>
+	<div id="innercontent">
+		<div id="toptext">General</div>
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="Back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+			<a wicket:id="addStudent" href="#" title="Add Student"><img src="newIMG/add.png" border="0" height="30" width="30" /></a>
+		</div>
+		
+		<div align=center>
+		<form wicket:id="studentsearch" autocomplete=off>
+			<i>Student Search:</i>
+			<input wicket:id="searchname" type="text" size="25" maxlength="35" />
+			<input wicket:id="searchbutton" class="button" type="submit" value="search"/>
+			<br/><span class="note">*To reset, leave the textfield empty then click search</span>
+		</form>
+		</div>
+		
+		<br/><br/>
+		<table align=center cellspacing="0" id="dataTable" width="95%">
+		<tr>
+			<td colspan=5>
+				<i><span wicket:id="results"></span><br/></i>
+				<span wicket:id="navigator">[dataview navigator]</span>
+			</td>
+		</tr>
+    	<tr>
+    		<th wicket:id="orderByStudentId">Student ID</th>
+    		<th wicket:id="orderByName">Name</th>
+    		<th wicket:id="orderByDept">Department</th>
+    		<th wicket:id="orderByCol">College</th>
+    		<!--<th wicket:id="orderByEnr">Enrolled</th>-->
+    		<th>Action</th>
+    	</tr>
+    	<tr wicket:id="studentlist">
+    		<td><span wicket:id="student_id"></span></td>
+	        <td><span wicket:id="name"></span></td>
+	        <td><span wicket:id="deptname"></span></td>
+	         <td><span wicket:id="collegename"></span></td>
+	         <!--<td><span wicket:id="enrolled"></span></td>-->
+	         <td><span wicket:id="action"></span></td>
+    	</tr>
+    	</table>
+    	
+	</div>
+</wicket:extend>

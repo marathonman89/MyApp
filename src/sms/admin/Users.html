@@ -1,0 +1,48 @@
+<wicket:extend>
+<h3>Privileges</h3>
+	<hr/>
+	<div id="innercontent">
+		<div id="toptext">General</div>
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="Back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		</div><br/>
+		<div wicket:id="error" class="error"></div>
+		<div align=center>
+		<form wicket:id="acctSearchForm" autocomplete=off>
+			<i>Account Search:</i>
+			<input wicket:id="part1" type="text" size="5" maxlength="4" /> - 
+			<input wicket:id="part2" type="text" size="5" maxlength="4" />
+			<input wicket:id="searchButton" class="button" type="submit" value="search"/>
+			<br/><span class="note">*To reset, leave the textfields empty then click search</span>
+		</form>
+		</div>
+		
+		
+		<br/><br/>
+		<table align=center cellspacing="0" id="dataTable" width="85%">
+		<tr>
+			<td colspan=4>
+				<i><span wicket:id="results"></span><br/></i>
+				<span wicket:id="navigator">[dataview navigator]</span>
+				<a href="#" wicket:id="allAcct"><i>ALL</i></a>&nbsp;&nbsp;
+				<a href="#" wicket:id="filterActive"><i>ACTIVE (<span wicket:id="active"></span>)</i></a>&nbsp;&nbsp;
+				<a href="#" wicket:id="filterPending"><i>PENDING (<span wicket:id="pending"></span>)</i></a>&nbsp;&nbsp;
+				<a href="#" wicket:id="filterBlock"><i>BLOCK (<span wicket:id="block"></span>)</i></a>&nbsp;&nbsp;
+			</td>
+		</tr>
+    	<tr>
+    		<th wicket:id="orderByEmployeeId">Account</th>
+    		<th>Password</th>
+    		<th wicket:id="orderByAcctStatus">Account Status</th>
+    		<th>Action</th>
+    		
+    	</tr>
+    	<tr wicket:id="sorting">
+	        <td><span wicket:id="employee_id"></span></td>
+	        <td><span wicket:id="password"></span></td>
+	        <td><span wicket:id="status"></span></td>
+	        <td><span wicket:id="action"></span></td>
+    	</tr>
+    	</table>
+	</div>
+</wicket:extend>

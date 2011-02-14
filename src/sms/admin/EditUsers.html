@@ -1,0 +1,78 @@
+<wicket:extend>
+<div id="dataForm">
+
+	<form wicket:id="doneform">
+		<div align=right><input wicket:id="done" class="button" type="submit" value="DONE"/></div>
+	</form>
+	<!--
+	<div id="back">
+		<a href="javascript:history.go(-1)" title="Back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+	</div>
+	-->
+	<br/><br/>
+	<form wicket:id="privilegesform">
+	<center>
+	<h2>Edit Privileges</h2>
+	User Account: <i><span wicket:id="employee_id"></span></i><br/>
+	<i>Account Status: <select wicket:id="status"></select></i>
+	</center>
+	<br/><br/>
+	<table id="dataTable" width="100%" border="0">
+		<tr>
+			<td width="35%">
+				<fieldset>
+			    	<legend>Department</legend>
+			    	<input wicket:id="department" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+			<td width="35%">
+				<fieldset>
+			    	<legend>Administration</legend>
+			    	<input wicket:id="administration" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+			<td width="35%">
+				<fieldset>
+			    	<legend>Scholarship</legend>
+			    	<input wicket:id="scholarship" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+		</tr>
+		<tr>
+			<td>
+				<fieldset>
+			    	<legend>Admission</legend>
+			    	<input wicket:id="admission" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+			<td>
+				<fieldset>
+			    	<legend>Curriculum Management</legend>
+			    	<input wicket:id="curriculum" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+			<td>
+				<fieldset>
+			    	<legend>College</legend>
+			    	<input wicket:id="college" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+		</tr>
+		<tr>
+			<td>
+				<fieldset>
+			    	<legend>Faculty</legend>
+			    	<input wicket:id="faculty" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+			<td>
+				<fieldset>
+			    	<legend>Registrar</legend>
+			    	<input wicket:id="registrar" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+			<td>
+				<fieldset>
+			    	<legend>HR</legend>
+			    	<input wicket:id="hr" type="checkbox"/> ALLOW
+			  	</fieldset></td>
+		</tr>
+		<tr>
+			<td colspan=3 align=right><input type="submit" value="Save" wicket:id="edit" class="button" /></td>
+		</tr>
+	</table>
+	</form>
+</div>
+</wicket:extend>

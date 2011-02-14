@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<delete id="delRecord" parameterClass="sms.student.Student">
+		DELETE 
+		FROM REGISTRATION_RECORD 
+		WHERE 
+			RECORD_ID=#record_id# AND
+			STUDENT_ID=#student_id#
+	</delete>
+	<delete id="disallowPrivilege" parameterClass="sms.user.Employee">
+		DELETE 
+		FROM USER_ROLE
+		WHERE 
+			EMPLOYEE_ID=#employee_id# AND
+			ROLE_ID=#role_id#
+	</delete>
+</sqlMap>

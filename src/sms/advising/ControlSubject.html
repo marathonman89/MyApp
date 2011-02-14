@@ -1,0 +1,37 @@
+<wicket:extend>
+<br/><br/>
+<form wicket:id="controlform">
+<table id="dataTable" width="100%">
+	<tr>
+		<th>Subject</th>
+		<th>Section</th>
+		<th>Time</th>
+		<th>Day</th>
+		<th>Room</th>
+		<th>Slot</th>
+		<th>Dept</th>
+		<th>College</th>
+		<th>Course</th>
+		<th></th>
+	</tr>
+	<span wicket:id="group">
+	<tr wicket:id="eachSubject">
+		<td wicket:id="subject_name"></td>
+		<td wicket:id="subject_section"></td>
+		<td wicket:id="time"></td>
+		<td wicket:id="day"></td>
+		<td wicket:id="room"></td>
+		<td wicket:id="slot"></td>
+		<td wicket:id="dept_name"></td>
+		<td wicket:id="college_name"></td>
+		<td wicket:id="program_name"></td>
+		<!-- <td><input type="radio" wicket:id="selected" /></td> -->
+		<td><input type="checkbox" wicket:id="checkbox"/></td>
+	</tr>
+	</span>
+	<tr height=30>
+		<td colspan=10 align=right><input class="button" type="submit" value="control"/></td>
+	</tr>
+</table>
+</form>
+</wicket:extend>

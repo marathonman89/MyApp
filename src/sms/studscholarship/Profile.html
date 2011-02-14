@@ -1,0 +1,41 @@
+<wicket:extend>
+<div id="dataForm">
+	<div id="back">
+		<a href="javascript:history.go(-1)" title="back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		<a wicket:id="editStudentScholarship" href="#" title="Edit Student Scholarship"><img src="newIMG/edit.png" border="0" height="30" width="30" /></a>
+	</div>
+	<div><br/><center>
+		<h2>Student Scholarship Information</h2>
+		<br/>
+		<table id="dataTable" width="80%" border="0">
+			<tr>
+				<td class="info" width="35%">Student ID</td>
+				<td width="50%"><span wicket:id="student_id"></span></td>
+			</tr>
+			<tr>
+				<td class="info">First Name</td>
+				<td><span wicket:id="fname"></span></td>
+			</tr>
+			<tr>
+				<td class="info">Middle Name</td>
+				<td><span wicket:id="mname"></span></td>
+			</tr>
+			<tr>
+				<td class="info">Last Name</td>
+				<td><span wicket:id="lname"></span></td>
+			</tr>
+			<tr>
+				<td class="info">Scholarship</td>
+				<td><span wicket:id="scholarship"></span></td>
+			</tr>
+			<tr>
+				<td class="info">Status</td>
+				<td><span wicket:id="status"></span></td>
+			</tr>
+		</table>
+		<br/>
+	
+		</center>
+	</div>
+</div>
+</wicket:extend>

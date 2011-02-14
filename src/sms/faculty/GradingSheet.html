@@ -1,0 +1,45 @@
+<wicket:extend>
+<h3>Grading Sheet</h3>
+	<hr/>
+	<div id="innercontent">
+		<div id="toptext">General</div>
+		<!-- <div wicket:id="lazy"></div> -->
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		</div>
+		<br/>
+		<form wicket:id="subjectsHandled">
+		<table align=center border=0 id="dataTable">
+		<tr>
+			<th colspan=7 style="text-align:center;background-color:#D6D6D6;width:auto;">Handled Subjects</th>
+		</tr>
+		<tr style="background-color:#e9e9e9;">
+			<th style="width:10%;">Section</th>
+			<th style="width:15%;">Course Number</th>
+			<th style="width:30%;">Course Description</th>
+			<th style="width:10%;">Time</th>
+			<th style="width:8%;">Day</th>
+			<th style="width:7%;">Room</th>
+			<th style="width:5%;">Action</th>
+		</tr>
+		<span wicket:id="group">
+		<tr class="data" wicket:id="eachSubject">
+			<td wicket:id="subject_section"></td>
+			<td wicket:id="subject_code"></td>
+			<td wicket:id="subject_name"></td>
+			<td wicket:id="time"></td>
+			<td wicket:id="day"></td>
+			<td wicket:id="room"></td>
+			<td><input type="radio" wicket:id="selected" /></td>
+		</tr>
+		</span>
+		<tr>
+			<td colspan=7 align=center><i><h4 style="color: #dd1212;" wicket:id="noentry"></h4></i></td>
+		</tr>
+		<tr>
+			<td colspan=7 align=right><input class="button" type="submit" value="GO" wicket:id="go" /></td>
+		</tr>
+		</table>
+		</form>
+	</div>
+</wicket:extend>

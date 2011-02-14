@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" type="text/css" href="newCSS/styles.css" />
+	<link rel="stylesheet" type="text/css" href="newCSS/jquery.alerts.css"   media="screen" />
+	<link rel="icon" type="image/gif" href="newIMG/favicon.gif">
+	<link rel="stylesheet" type="text/css" href="newCSS/jquery.ui.all.css" />
+	
+	<script type="text/javascript" src="newJS/prototype.js"></script>
+	<script type="text/javascript" src="newJS/scriptaculous.js"></script>
+	<script type="text/javascript" src="newJS/jquery.js" ></script>
+	<script type="text/javascript" src="newJS/jquery.ui.draggable.js" ></script>
+	<script type="text/javascript" src="newJS/jquery.alerts.js" ></script>
+	<script type="text/javascript" src="newJS/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="newJS/jquery.ui.core.js"></script>
+	<script type="text/javascript" src="newJS/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="newJS/jquery.ui.datepicker.js"></script>
+	
+	<script type="text/javascript">
+	function toggleDisp() {
+		for (var i=0;i<arguments.length;i++){
+			var d = $(arguments[i]);
+			if (d.style.display == 'none')
+				d.style.display = 'block';
+			else
+				d.style.display = 'none';
+		}
+	}
+
+	function toggleTab(num,numelems,opennum,animate) {
+		if ($('tabContent'+num).style.display == 'none'){
+			for (var i=1;i<=numelems;i++){
+				if ((opennum == null) || (opennum != i)){
+					var temph = 'tab'+i;
+					var h = $(temph);
+					if (!h){
+						var h = $('current');
+						h.id = temph;
+					}
+					var tempc = 'tabContent'+i;
+					var c = $(tempc);
+					if(c.style.display != 'none'){
+						if (animate || typeof animate == 'undefined')
+							Effect.toggle(tempc,'appear',{duration:1, queue:{scope:'menus', limit: 3}});
+						else
+							toggleDisp(tempc);
+					}
+				}
+			}
+			var h = $('tab'+num);
+			if (h)
+				h.id = 'current';
+			h.blur();
+			var c = $('tabContent'+num);
+			c.style.marginTop = '2px';
+			if (animate || typeof animate == 'undefined'){
+				Effect.toggle('tabContent'+num,'appear',{duration:1, queue:{scope:'menus', position:'end', limit: 3}});
+			}else{
+				toggleDisp('tabContent'+num);
+			}
+		}
+	}
+	
+	// right click function disabled
+	var message="Sorry, The Function is Permanently Disabled!";
+	
+	///////////////////////////////////
+	function clickIE4(){
+		if (event.button==2){
+			alert(message);
+			return false;
+		}
+	}
+	
+	function clickNS4(e){
+		if (document.layers||document.getElementById&&!document.all){
+			if (e.which==2||e.which==3){
+				jAlert(message);
+				return false;
+			}
+		}
+	}
+	
+	if (document.layers){
+		document.captureEvents(Event.MOUSEDOWN);
+		document.onmousedown=clickNS4;
+	}
+	else if (document.all&&!document.getElementById){
+		document.onmousedown=clickIE4;
+	}
+	document.oncontextmenu=new Function("jAlert(message);return false")
+	
+	//end of right click function disabled 
+	
+	$(function() {
+		$('#bdate').datepicker({
+			changeMonth: true,
+			changeYear: true,
+			yearRange: '1960:1995',
+			dateFormat: 'mm-dd-yy'
+		});
+	});
+	
+	</script>
+</head>
+
+<body>
+	<div id=wrapper>
+	<div id="header">
+	<!--
+		<p>
+		<img align=left src="newIMG/header_text.png" height=130 width=320/>
+		<br/><br/><br/><br/><span>School Management System</span>
+		</p> -->
+	</div>
+	<wicket:child/>
+
+	<div id="footer">
+		<p align=center>Powered by: <img style="vertical-align:bottom;" src="newIMG/wicket.png"/> <a href="http://wicket.apache.org/" target="_BLANK">Apache Wicket</a></p>
+		<p align=center>&copy;2009-2010&nbsp; Software Engineering II &nbsp;All Rights Reserved<br/>
+		Developed by: Godwinh Lopez, Liezil Daberao, Gwyn Manlapig, Eleazar Pepito, MARK ANHONY MANLIMOS</p>
+		
+	</div> 
+	</div>
+</body>
+</html>

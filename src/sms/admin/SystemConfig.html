@@ -1,0 +1,53 @@
+<wicket:extend>
+<h3>Privileges</h3>
+	<hr/>
+	<div id="innercontent">
+		<div id="toptext">General</div>
+		<div id="back">
+			<a href="javascript:history.go(-1)" title="Back"><img src="newIMG/back.png" border="0" height="30" width="30"/></a>
+		</div><br/>
+		<form wicket:id="configForm">
+		<table align=center cellspacing="0" id="dataTable" width="80%">
+			<tr>
+				<th colspan=2>Enrollment</th>
+			</tr>
+			<tr>
+				<td width="80%">Enable Enrollment?</td>
+				<td width="20%" align=center><select wicket:id="enr_enabled"></select></td>
+			</tr>
+			<tr>
+				<td>Enrollment for the year</td>
+				<td align=center><select wicket:id="year_started"></select></td>
+			</tr>
+			<tr>
+				<td>Enrollment for the semester</td>
+				<td align=center><select wicket:id="sem_started"></select></td>
+			</tr>
+		</table>
+		<br/>
+
+		<table align=center cellspacing="0" id="dataTable" width="80%">
+			<tr>
+				<th colspan=2>System Log</th>
+			</tr>
+			<tr>
+				<td>Enable Log for the System?</td>
+				<td align=center><select wicket:id="log_enabled"></select></td>
+			</tr>
+			<tr>
+				<td width="80%">Create a Log File</td>
+				<td width="20%" align=center><div wicket:id="modal"></div><a href="#" wicket:id="modalCreate">Create</a></td>
+			</tr>
+			<tr>
+				<td>Log File to use</td>
+				<td width="10%" align=center><div wicket:id="modal1"></div><a href="#" wicket:id="selectLogFile">Select</a></td>
+			</tr>
+		</table>
+
+			<br/><br/>
+			<div align=right style="width:90%;"><input type="submit" wicket:id="saveconfig" class="button" value="SAVE" /></div>
+			<br/><br/>
+		</form>
+		
+	</div>
+</wicket:extend>
